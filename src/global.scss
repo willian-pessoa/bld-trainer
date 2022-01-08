@@ -1,0 +1,15 @@
+$baseColor: #121212;
+$overlay900: #263238;
+$overlay800: #37474F;
+$overlay700: #455A64;
+$overlay600: #546E7A;
+$overlay300: #90A4AE;
+$overlay000: #ECEFF1;
+
+$width: 768px;
+
+@mixin mobile{
+    @media (max-width: $width){
+        @content 
+    }
+}

@@ -1,0 +1,11 @@
+@import "../../global.scss";
+
+.topBar{
+    z-index: 2;
+    background-color: $overlay800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    top: 10px;
+}
