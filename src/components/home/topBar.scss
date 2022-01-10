@@ -4,12 +4,37 @@
     z-index: 2;
     background-color: $overlay800;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 60px;
     width: 100vw;
+    position: relative;
 
     .homeIcon{
-        margin-right: 50px;
+        text-decoration: none !important;
+        color: white;
+        font-size: 40px;
+        right: 1;
+        margin-left: 10px;
     }
+
+    .homeIcon:link {
+        color: white;
+      }
+      
+      .homeIcon:visited {
+        color: white;
+      }
+      
+      .homeIcon:hover {
+        color: $overlay300;
+      }
+      
+      .homeIcon:active {
+        color: white;
+      }
+
+      .hidden{
+        visibility: hidden;
+      }
 }

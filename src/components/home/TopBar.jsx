@@ -10,6 +10,7 @@ export default function TopBar({title}) {
             <Home className='homeIcon'/>
             </Link>
             <h1>{title}</h1>
+            <Home className='homeIcon hidden'/>
         </div>
     )
 }

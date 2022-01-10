@@ -1,5 +1,5 @@
 import React from "react";
-import { accurateTimer } from "./helpers.js";
+import { accurateTimer, formatTime } from "./helpers.js";
 import { useState, useEffect } from "react";
 import "./bldApp.scss";
 import TopBar from "../home/TopBar.jsx";
@@ -7,6 +7,8 @@ import Statistics from "./Statistics.jsx";
 import CardsBLD from "./CardsBLD.jsx";
 import MemoCheckBLD from "./MemoCheckBLD.jsx";
 import ResultBLD from "./ResultBLD";
+import BackspaceIcon from '@mui/icons-material/Backspace';
+
 
 export default function BldApp({ LETTERS }) {
   // timer state
@@ -15,35 +17,52 @@ export default function BldApp({ LETTERS }) {
   const [stop, setStop] = useState(() => {}); // hold the function to stop the timer
 
   // Bld App states
-  const [homeOn, setHomeOn] = useState(false); //true if in home bld
+  const [homeOn, setHomeOn] = useState(true); //true if in home bld
   const [memoOn, setMemoOn] = useState(false); //true if cards show up
-  const [checkMemoOn, setCheckMemoOn] = useState(true); // true if input show up to type cards 
+  const [checkMemoOn, setCheckMemoOn] = useState(false); // true if input show up to type cards 
   const [resultOn, setResultOn] = useState(false); // true if resullt show up
 
-  // HANDLE EVENTS SPACEBAR and ENTER
+  // HANDLE EVENTS SPACE BAR, BACKSPACE and ENTER
   // state to track if space it's helded
   const [spaceDown, setSpaceDown] = useState(false);
   const handleDown = (event) => {
+    // SPACE BAR
     // if space is pressed, then app map spacebar like helded, see handle up function
     // the space press is just handled when in the home bld page or the result page
-    if (event.key === " " && !spaceDown && homeOn || resultOn) {
+    if (event.key === " " && !spaceDown && ( homeOn || resultOn)) {
       setSpaceDown(true);
-      console.log("D"+spaceDown)
+    }
+    // ENTER
+    // if enter press in check stage, 
+    // then timer stop and the input it's storaged to make the check
+    if (event.key === "Enter" && checkMemoOn){
+      pauseTimer();
+      showResult();
+    } else if (event.key === "Enter" && memoOn){
+      startCheckMemorization();
+    }
+    // BACKSPACE
+    if (event.key === "Backspace" && resultOn){
+      resetBldApp();
     }
   };
 
   const handleUp = (event) => {
+    // SPACE BAR
     // when spacebar it's up after pressed, the if statement trigger the startTimer
-    if (event.key === " " && homeOn || resultOn) {
+    // and start the app, show up the cards to memo
+    if (event.key === " " && (homeOn || resultOn)) {
+      // functions to trigger
       startTimer();
-      console.log(spaceDown)
+      startMemorization();
+      // states deal
       setSpaceDown(false);
     }
   };
 
   // event listeners to keys pressed
   useEffect(() => {
-    window.addEventListener("keydown", handleDown);
+    window.addEventListener("keydown",(event) => handleDown(event));
     window.addEventListener("keyup", handleUp);
     return () => {
       window.removeEventListener("keydown", handleDown);
@@ -71,16 +90,39 @@ export default function BldApp({ LETTERS }) {
       setStop(stopWatch);
     }
   };
-
   const pauseTimer = () => {
     if (timeOn) {
       stop.cancel();
     }
   };
 
+  // APP LOGIC
+  const startMemorization = () => {
+    setMemoOn(true);
+    setHomeOn(false);
+  }
+  const startCheckMemorization = () => {
+    setCheckMemoOn(true);
+    setMemoOn(false);
+  }
+  const showResult = () => {
+    setResultOn(true);
+    setCheckMemoOn(false);
+  }
+  const resetBldApp = () => {
+    setHomeOn(true);
+    setResultOn(false);
+  }
+
+
   return (
     <div className="bldApp">
-      <TopBar title={`Current Level: `} />
+      {/* Top bar, show up in home and result change if home or result*/}
+      <div className={`${(memoOn || checkMemoOn) && "hidden"}`}>
+      <TopBar title={`${homeOn ? "Current Level :" : "Next Level :"}`} />
+      </div>
+
+      {/* Display Part, change dinamic acordding the propely stage */}
       <div className="displayApp">
         {
           // look to the state of app to show the correct stage 
@@ -89,13 +131,18 @@ export default function BldApp({ LETTERS }) {
           resultOn ? <ResultBLD /> : <Statistics/> // show result or go to start stage
         }
       </div>
+
+      {/* Footer Part, show information to use the app */}
       {
-        homeOn &&
-        <button>
-        <h1>Press SPACE to Start</h1>
-        </button> 
+        homeOn ? <h1>Press <span>SPACE</span> to Start</h1> :
+        memoOn || checkMemoOn ? <h1>Press <span>ENTER</span> to Continue</h1> :
+        resultOn && 
+        <div className="wrapper_info">
+          <h1>Press <span>SPACE</span> to Start</h1>
+          <h1>Press <span><BackspaceIcon/></span> to Return</h1>
+        </div> 
       }
-      <h1>{time / 10}</h1>
+      <h1>{formatTime(time)}</h1>
     </div>
   );
 }

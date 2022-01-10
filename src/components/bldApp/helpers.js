@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 export const accurateTimer = (fn, time = 1000) => {
     // nextAt is the value for the next time the timer should fire.
     // timeout holds the timeoutID so the timer can be stopped.
@@ -30,3 +28,26 @@ export const accurateTimer = (fn, time = 1000) => {
     // accurateTimer.
     return { cancel };
 };
+
+// to format the timer receive in thSeconds
+export const formatTime = (time) => {
+    let min = Math.trunc(time / 600);
+    let sec = (time / 10) % 60;
+
+    return(
+        (min < 10 ? "0" + min : min) + ":" + 
+        (sec < 10 ? "0" + sec : sec)
+    );
+  }
+
+// function to generate 
+export const generateRandom = (amount, max) => {
+  let arrRandoms = [];
+  while (arrRandoms.length < amount){
+    let random = Math.floor(Math.random() * max);
+    if (!arrRandoms.some(item => item === random)){
+      arrRandoms.push(random);
+    }
+  }
+  return arrRandoms;
+} 
