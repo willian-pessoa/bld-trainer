@@ -1,8 +1,99 @@
+@import "../../global.scss";
+
 .homeScreen{
     height: calc(100vh - 15px);
     padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .letterScheme{
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: $overlay600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 10px;
+
+        h4{
+            padding-bottom: 5px;
+        }
+
+        input{
+            border: 1px solid $baseColor;
+            padding: 1%;
+            width: 500px;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        input:focus{
+            outline: none;
+        }
+    }
+
+    .letterScheme:hover{
+        background-color: $overlay800;
+    }
 
     .appSelection{
-        
+        display: flex;
+        width: 70vw;
+        justify-content: space-evenly;
+
+        hr{
+            border: 1px solid lightgray;
+            width: 95%;
+        }
+
+        .bld{
+            padding: 10px;
+            width: 215px;
+            height: 300px;
+            background-color: $overlay600;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            text-align: center;
+            cursor: pointer;
+
+            img{
+                height: 200px;
+                border-radius: 10px;
+            }
+        }
+
+        .bld:hover{
+            background-color: $overlay800;
+        }
+
+        .mbld{
+            padding: 10px;
+            width: 215px;
+            height: 300px;
+            background-color: $overlay600;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            text-align: center;
+            cursor: pointer;
+
+            img{
+                height: 200px;
+                border-radius: 10px;
+            }
+        }
+
+        .mbld:hover{
+            background-color: $overlay800;
+        }
     }
 }

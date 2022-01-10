@@ -1,3 +1,6 @@
 .bldApp{
-    background-color: lightblue;
+    height: calc(100vh - 15px);
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
 }
