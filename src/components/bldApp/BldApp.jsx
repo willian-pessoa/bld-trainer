@@ -26,6 +26,7 @@ export default function BldApp({ LETTERS }) {
   // state to track if space it's helded
   const [spaceDown, setSpaceDown] = useState(false);
   const handleDown = useCallback((event) => {
+    // TIMER FUNCTIONS
     function pauseTimer() {
       if (timeOn) {
         stop.cancel();
@@ -41,6 +42,8 @@ export default function BldApp({ LETTERS }) {
     // if enter press in check stage, 
     // then timer stop and the input it's storaged to make the check
     if (event.key === "Enter" && checkMemoOn){
+      setSpaceDown(false);
+      setTimeOn(false);
       pauseTimer();
       showResult();
     } else if (event.key === "Enter" && memoOn){
@@ -76,14 +79,15 @@ export default function BldApp({ LETTERS }) {
     // SPACE BAR
     // when spacebar it's up after pressed, the if statement trigger the startTimer
     // and start the app, show up the cards to memo
-    if (event.key === " " && (homeOn || resultOn)) {
-      // functions to trigger
-      startTimer();
-      startMemorization();
+    if (event.key === " " && (homeOn || resultOn) && spaceDown) {
       // states deal
       setSpaceDown(false);
+      // functions to trigger
+      setTime(0);
+      startTimer();
+      startMemorization();
     }
-  },[homeOn, resultOn, stop, timeOn, time]);
+  },[homeOn, resultOn, stop, timeOn, time, spaceDown]);
 
   // event listeners to keys pressed
   useEffect(() => {
@@ -96,8 +100,6 @@ export default function BldApp({ LETTERS }) {
   }, [handleUp, handleDown])
 
   
-  
-
   // APP LOGIC
   function startMemorization() {
     setMemoOn(true);
@@ -114,11 +116,13 @@ export default function BldApp({ LETTERS }) {
   const resetBldApp = () => {
     setHomeOn(true);
     setResultOn(false);
+    setTimeOn(false);
+    setTime(0);
   }
 
 
   return (
-    <div className={`bldApp ${spaceDown && "awaiting"}`}>
+    <div className={`bldApp ${(spaceDown && (homeOn || resultOn)) && "awaiting"}`}>
       {/* Top bar, show up in home and result change if home or result*/}
       <div className={`${(memoOn || checkMemoOn) && "hidden"}`}>
       <TopBar title={`${homeOn ? "Current Level :" : "Next Level :"}`} />
