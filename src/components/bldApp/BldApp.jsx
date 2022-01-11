@@ -1,6 +1,6 @@
 import React from "react";
 import { accurateTimer, formatTime } from "./helpers.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./bldApp.scss";
 import TopBar from "../home/TopBar.jsx";
 import Statistics from "./Statistics.jsx";
@@ -25,7 +25,12 @@ export default function BldApp({ LETTERS }) {
   // HANDLE EVENTS SPACE BAR, BACKSPACE and ENTER
   // state to track if space it's helded
   const [spaceDown, setSpaceDown] = useState(false);
-  const handleDown = (event) => {
+  const handleDown = useCallback((event) => {
+    function pauseTimer() {
+      if (timeOn) {
+        stop.cancel();
+      }
+    };
     // SPACE BAR
     // if space is pressed, then app map spacebar like helded, see handle up function
     // the space press is just handled when in the home bld page or the result page
@@ -45,9 +50,29 @@ export default function BldApp({ LETTERS }) {
     if (event.key === "Backspace" && resultOn){
       resetBldApp();
     }
-  };
+  }, [checkMemoOn, homeOn, memoOn, resultOn, spaceDown, stop, timeOn]);
 
-  const handleUp = (event) => {
+  const handleUp = useCallback((event)=>{
+    // TIMER FUNCTIONS
+    function startTimer() {
+      if (!timeOn) {
+        setTimeOn(true);
+        let tempo = 0;
+        let stopWatch = accurateTimer(() => {
+          tempo++;
+          setTime(tempo);
+        }, 100);
+        setStop(stopWatch);
+      } else {
+        let tempo = time;
+        stop.cancel();
+        let stopWatch = accurateTimer(() => {
+          tempo++;
+          setTime(tempo);
+        }, 100);
+        setStop(stopWatch);
+      }
+    }
     // SPACE BAR
     // when spacebar it's up after pressed, the if statement trigger the startTimer
     // and start the app, show up the cards to memo
@@ -58,7 +83,7 @@ export default function BldApp({ LETTERS }) {
       // states deal
       setSpaceDown(false);
     }
-  };
+  },[homeOn, resultOn, stop, timeOn, time]);
 
   // event listeners to keys pressed
   useEffect(() => {
@@ -70,34 +95,11 @@ export default function BldApp({ LETTERS }) {
     }
   }, [handleUp, handleDown])
 
-  // TIMER FUNCTIONS
-  const startTimer = () => {
-    if (!timeOn) {
-      setTimeOn(true);
-      let tempo = 0;
-      let stopWatch = accurateTimer(() => {
-        tempo++;
-        setTime(tempo);
-      }, 100);
-      setStop(stopWatch);
-    } else {
-      let tempo = time;
-      stop.cancel();
-      let stopWatch = accurateTimer(() => {
-        tempo++;
-        setTime(tempo);
-      }, 100);
-      setStop(stopWatch);
-    }
-  };
-  const pauseTimer = () => {
-    if (timeOn) {
-      stop.cancel();
-    }
-  };
+  
+  
 
   // APP LOGIC
-  const startMemorization = () => {
+  function startMemorization() {
     setMemoOn(true);
     setHomeOn(false);
   }
@@ -116,7 +118,7 @@ export default function BldApp({ LETTERS }) {
 
 
   return (
-    <div className="bldApp">
+    <div className={`bldApp ${spaceDown && "awaiting"}`}>
       {/* Top bar, show up in home and result change if home or result*/}
       <div className={`${(memoOn || checkMemoOn) && "hidden"}`}>
       <TopBar title={`${homeOn ? "Current Level :" : "Next Level :"}`} />

@@ -1,3 +1,5 @@
+@import "../../global.scss";
+
 .bldApp{
     height: calc(100vh - 15px);
     padding-top: 15px;
@@ -9,4 +11,8 @@
     .hidden{
         visibility:  hidden;
     }
+}
+
+.awaiting{
+    background-color: $overlay300;
 }
