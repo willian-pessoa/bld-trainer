@@ -8,9 +8,36 @@
     align-items: center;
     justify-content: space-around;
 
+    .displayApp{
+        width: 70vw;
+        height: calc(100vh - 200px);
+    }
+
     .hidden{
         visibility:  hidden;
     }
+
+    button{
+        cursor: pointer;
+        padding: 2px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: $overlay800;
+        background-repeat: no-repeat;
+        border: 1px $overlay800 solid;
+        overflow: hidden;
+        color: white;
+        outline: none;
+        border-radius: 10px;
+        margin-right: 20px;
+    }
+
+}
+
+.resultBtn{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
 }
 
 .awaiting{
