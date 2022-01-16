@@ -5,6 +5,7 @@ import "./bldApp.scss";
 // functions + hooks
 import { useRound } from "../../hooks/useRound.jsx";
 import { useTimer } from "../../hooks/useTimer";
+import { useSnapshot } from "valtio";
 
 // Components
 import TopBar from "../home/TopBar.jsx";
@@ -12,7 +13,6 @@ import Statistics from "./Statistics.jsx";
 import CardsBLD from "./CardsBLD.jsx";
 import MemoCheckBLD from "./MemoCheckBLD.jsx";
 import ResultBLD from "./ResultBLD";
-import { RoundaboutRight } from "@mui/icons-material";
 
 export default function BldApp({ LETTERS }) {
   const [nivel, setNivel] = useState(parseInt(localStorage.getItem("level")));
@@ -96,7 +96,6 @@ export default function BldApp({ LETTERS }) {
       ) : (
         ""
       )}
-      <h1>{time}</h1>
     </div>
   );
 }

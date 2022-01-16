@@ -11,6 +11,15 @@ if (localStorage.getItem("LETTERS") === null){
 if (localStorage.getItem("level") === null){
   localStorage.setItem("level", 1);
 }
+if (localStorage.getItem("dataUser") === null){
+  localStorage.setItem("dataUser", JSON.stringify([
+    {
+      isRight: false,
+      level: 0,
+      time: 0,
+    }
+  ]))
+}
 // END LOCAL STORAGE MANIPULATION
 
 function App() {

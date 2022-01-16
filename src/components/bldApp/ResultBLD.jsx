@@ -5,12 +5,22 @@ import { useState,useMemo } from "react";
 import { strToArr, checkAnswer } from "./helpers";
 
 export default function ResultBLD({time, nivel}) {
-  const [arrPairs, setArrPairs] = useState(strToArr(localStorage.getItem("listLetterPairs")));
-  const [arrToCheck, setArrToCheck] = useState(strToArr(localStorage.getItem("textAnswer")));
+  const [arrPairs] = useState(strToArr(localStorage.getItem("listLetterPairs")));
+  const [arrToCheck] = useState(strToArr(localStorage.getItem("textAnswer")));
   const tupleAnswer = useMemo(()=>checkAnswer(arrPairs, arrToCheck),[arrPairs,arrToCheck]);
 
   let counter = -1;
 
+  // update local storage session data
+  let dataSession = {
+      isRight: tupleAnswer[0],
+      level: nivel,
+      time: time}
+  let dataUser = JSON.parse(localStorage.getItem("dataUser"));
+  dataUser.push(dataSession);
+  localStorage.setItem("dataUser", JSON.stringify(dataUser));
+
+  // update level to next round
   if (tupleAnswer[0]){
     let newLevel = nivel + 1;
     localStorage.setItem("level", newLevel);
@@ -22,11 +32,6 @@ export default function ResultBLD({time, nivel}) {
     localStorage.setItem("level", newLevel);
     }
   }
-
-  console.log(arrPairs);
-  console.log(arrToCheck);
-  console.log(counter);
-  console.log(tupleAnswer);
 
   const redStyle = {borderColor: "red", color: "red", boxShadow: "0 0 0.4em red"};
   const greenStyle = {borderColor: "green", color: "#32CD32", boxShadow: "0 0 0.4em green"};
