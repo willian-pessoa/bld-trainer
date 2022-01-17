@@ -1,5 +1,5 @@
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import HomeScreen from './components/home/HomeScreen';
 import BldApp from './components/bldApp/BldApp';
 import MbldApp from './components/mbldApp/MbldApp';
