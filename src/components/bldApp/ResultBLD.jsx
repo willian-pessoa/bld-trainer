@@ -21,7 +21,7 @@ export default function ResultBLD({time, nivel}) {
   localStorage.setItem("dataUser", JSON.stringify(dataUser));
 
   // update level to next round
-  if (tupleAnswer[0]){
+  if (tupleAnswer[0] && nivel < 11){
     let newLevel = nivel + 1;
     localStorage.setItem("level", newLevel);
   } else {

@@ -1,3 +1,10 @@
 .mbldApp{
-    border-color: lightgreen;
+
+    height: calc(100vh - 15px);
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    
 }

@@ -13,7 +13,11 @@ export default function HomeScreen({ LETTERS }) {
   const [letters, setLetters] = useState(LETTERS);
 
   const updateStorage = () =>{
-      localStorage.setItem("LETTERS", letters);
+      if (letters.length < 22){
+        localStorage.setItem("LETTERS", "ABCDEFGJKLMNOPQRSTUVWX")
+      } else {
+        localStorage.setItem("LETTERS", letters);
+      }
   }
 
   return (
@@ -26,6 +30,7 @@ export default function HomeScreen({ LETTERS }) {
           value={letters}
           type="text"
           maxLength="26"
+          minLength="22"
         />
       </div>
       <div className="appSelection">
@@ -49,7 +54,6 @@ export default function HomeScreen({ LETTERS }) {
       <form action="https://www.paypal.com/donate" method="post" target="_black">
       <input type="hidden" name="hosted_button_id" value="YJ29DR3TUQQWL" />
       <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-      <img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" />
       </form>
     </div>
   );

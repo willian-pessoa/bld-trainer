@@ -5,7 +5,6 @@ import "./bldApp.scss";
 // functions + hooks
 import { useRound } from "../../hooks/useRound.jsx";
 import { useTimer } from "../../hooks/useTimer";
-import { useSnapshot } from "valtio";
 
 // Components
 import TopBar from "../home/TopBar.jsx";
@@ -66,7 +65,7 @@ export default function BldApp({ LETTERS }) {
       {/* Display Part, change dinamic acordding the propely stage */}
       <div className="displayApp">
         {round.memo ? (
-          <CardsBLD nivel={nivel} LETTERS={LETTERS} />
+          <CardsBLD nivel={nivel > 11 ? 11 : nivel} />
         ) : round.check ? (
           <MemoCheckBLD />
         ) : round.result ? (

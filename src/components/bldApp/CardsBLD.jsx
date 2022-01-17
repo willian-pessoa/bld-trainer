@@ -3,16 +3,17 @@ import "./cardsBLD.scss";
 import { generateRandom } from "./helpers";
 import { useState } from "react";
 
-export default function Cards({ nivel, LETTERS}) {
+export default function Cards({ nivel }) {
   const [letterPairs, setLetterPairs] = useState([]);
-
+  const [letters] = useState(localStorage.getItem("LETTERS"))
+  
     // Generate Cards to Memo
     useEffect(() => {
-      let amount = parseInt(nivel) * 2;
+      let amount = nivel * 2;
       let arrOfPairs = [];
-      let randomIndex = generateRandom(amount, LETTERS.length);
+      let randomIndex = generateRandom(amount, letters.length);
       for (let i = 0; i < amount; i += 2) {
-        let pair = LETTERS[randomIndex[i]] + LETTERS[randomIndex[i + 1]];
+        let pair = letters[randomIndex[i]] + letters[randomIndex[i + 1]];
         arrOfPairs.push(pair);
       }
       setLetterPairs(arrOfPairs);
