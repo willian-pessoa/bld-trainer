@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/bld-trainer/static/css/main.19bf8d63.css",
-    "main.js": "/bld-trainer/static/js/main.c2143370.js",
+    "main.css": "/bld-trainer/static/css/main.e9508ac3.css",
+    "main.js": "/bld-trainer/static/js/main.da384e22.js",
     "index.html": "/bld-trainer/index.html",
-    "main.19bf8d63.css.map": "/bld-trainer/static/css/main.19bf8d63.css.map",
-    "main.c2143370.js.map": "/bld-trainer/static/js/main.c2143370.js.map"
+    "main.e9508ac3.css.map": "/bld-trainer/static/css/main.e9508ac3.css.map",
+    "main.da384e22.js.map": "/bld-trainer/static/js/main.da384e22.js.map"
   },
   "entrypoints": [
-    "static/css/main.19bf8d63.css",
-    "static/js/main.c2143370.js"
+    "static/css/main.e9508ac3.css",
+    "static/js/main.da384e22.js"
   ]
 }
