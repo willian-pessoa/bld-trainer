@@ -1,0 +1,28 @@
+@import "../../global.scss";
+
+.cardsMBLD{
+    display: wrap;
+
+    .cube{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .letter-pair{
+            margin: 10px;
+            font-size: x-large;
+            background-color: $overlay000;
+            border: 3px solid $overlay900;
+            box-shadow: 0 0 0.4em $overlay300;
+            border-radius: 5px;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-weight: 600;
+          }
+    }
+}

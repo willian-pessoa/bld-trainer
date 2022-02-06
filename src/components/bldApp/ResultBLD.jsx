@@ -2,7 +2,7 @@ import React from "react";
 import "./resultBLD.scss";
 import { useState,useMemo } from "react";
 
-import { strToArr, checkAnswer } from "./helpers";
+import { strToArr, checkAnswer } from "../../helpers.js";
 
 export default function ResultBLD({time, nivel}) {
   const [arrPairs] = useState(strToArr(localStorage.getItem("listLetterPairs")));

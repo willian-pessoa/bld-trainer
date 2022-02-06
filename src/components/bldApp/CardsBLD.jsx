@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./cardsBLD.scss";
-import { generateRandom } from "./helpers";
+import { generateRandom } from "../../helpers.js";
 import { useState } from "react";
 
 export default function Cards({ nivel }) {

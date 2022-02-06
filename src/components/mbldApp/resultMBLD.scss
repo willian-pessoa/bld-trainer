@@ -1,0 +1,40 @@
+@import "../../global.scss";
+
+.resultMBLD{
+
+    .container{
+
+        display: flex;
+        flex-direction: column;
+
+        .cardsMBLD_check{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .answerCards{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .letter-pair{
+            margin: 10px;
+            font-size: x-large;
+            background-color: $overlay000;
+            border: 3px solid $overlay900;
+            box-shadow: 0 0 0.4em $overlay300;
+            border-radius: 5px;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-weight: 600;
+          }
+    }
+
+}
