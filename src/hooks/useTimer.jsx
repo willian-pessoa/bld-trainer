@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useInterval from "./useInterval";
 
 export const useTimer = () =>{
     const [time, setTime] = useState(0);
     const [isOn, setIsOn] = useState(false);
-    const [delay, setDelay] = useState(1000);
+    const [delay] = useState(1000);
 
     useInterval(
         () =>{
